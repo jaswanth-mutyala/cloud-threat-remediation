@@ -1,0 +1,33 @@
+name: DevSecOps Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    name: Checkov Security Scan
+    
+    steps:
+      # 1. Download your code
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      # 2. Install Python (needed for Checkov)
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      # 3. Install Checkov
+      - name: Install Checkov
+        run: pip install checkov
+
+      # 4. Run the Scan
+      # We verify the "terraform" folder
+      - name: Run Checkov Scan
+        run: checkov -d terraform/ --soft-fail
+        # Note: --soft-fail means "Don't stop the pipeline even if you find errors."
+        # We use this so you can see the results without the build turning Red immediately.
