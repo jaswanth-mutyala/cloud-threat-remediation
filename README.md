@@ -22,7 +22,10 @@ Instead of relying on manual monitoring, this system uses **Infrastructure as Co
 4.  **Lambda** removes the compromised Security Group and attaches a "Forensics/Quarantine" group (Deny All).
 5.  **SNS** notifies the administrator via email.
 
-*(You can add your architecture diagram here)*
+![Architecture Diagram](docs/images/Architecture%20Diagram.png)
+
+---
+
 
 ---
 
